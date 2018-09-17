@@ -1,7 +1,10 @@
 package com.example.noriyoshi.Tankasantei;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -14,7 +17,7 @@ import java.math.BigDecimal;
 public class MainActivity extends AppCompatActivity {
 
     private void updatestuts(){
-        double a,b,c,d,e,f,g,h;
+        double a,b,c,d,e,f,g,h,i,j;
 
         a=NumBase.getFlute() + NumBase.getLiner();
         b=NumBase.getHaba() * NumBase.getNagare() / 1000000;
@@ -23,7 +26,17 @@ public class MainActivity extends AppCompatActivity {
         e=NumBase.getInsatuset();
         f=NumBase.getInsatutoosi();
 
-        g= (a+c)*b+(e/d)+f;
+        h=NumBase.getNukiset();
+        i=NumBase.getNukitoosi();
+        j=NumBase.getNukitukisuu();
+
+        if (j == 0) {
+
+
+            g = (a + c) * b + (e / d) + f;
+        }else{
+            g = (a + c) * b + (e / d) + f/j+(h/d)+(i/j) ;
+        }
 
         TextView tv=findViewById(R.id.result);
         tv.setText(BigDecimal.valueOf(g).toPlainString());
@@ -34,7 +47,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NumBase nb=new NumBase();
+
+        /*
+        保存済み原紙価格の取得
+         */
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+       // String ln = sharedPreferences.getString("LINER_KAKAKU","0");
+       // String hs = sharedPreferences.getString("HUTUU_KAKAKU","0");
+        //String ks = sharedPreferences.getString("KYOUKA_KAKAKU","0");
+
+      //NumBase.setLinerkiro((double)Integer.parseInt(ln));
+      //NumBase.setSinkiro((double)Integer.parseInt(hs));
+      //NumBase.setKyoukakiro((double)Integer.parseInt(ks));
+
+        /*
+        原紙価格設定ボタン押し下げ
+         */
+        View gen = findViewById(R.id.gensikakakusettei);
+        gen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setContentView(R.layout.activity_sub);
+                Intent intent = new Intent(getApplication(), GensiKakakuSettei.class);
+                startActivity(intent);
+            }
+        });
+/*
+原紙とフルートの種類選択
+ */
+
 
         RadioGroup f = findViewById(R.id.flute);
         RadioGroup l = findViewById(R.id.liner);
@@ -45,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (checkedId){
 
                     case R.id.radioA:
-                        NumBase.setFlute(11.13);
+                        NumBase.setFlute(NumBase.getSinkiro()*1.6);
                         break;
                     case R.id.radioAB:
-                        NumBase.setFlute(27.84);
+                        NumBase.setFlute(NumBase.getSinkiro()*4);
                         break;
                     case R.id.radioB:
-                        NumBase.setFlute(9.74);
+                        NumBase.setFlute(NumBase.getSinkiro()*1.4);
                         break;
                 }
 
@@ -66,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
                 switch(checkedId){
 
                     case R.id.radioK5:
-                        NumBase.setLiner(24.82);
+                        NumBase.setLiner(NumBase.getLinerkiro()*0.17*2);
                         break;
                     case R.id.radioK6:
-                        NumBase.setLiner(30.66);
+                        NumBase.setLiner(NumBase.getLinerkiro()*0.21*2);
                         break;
                     case R.id.radioK7:
-                        NumBase.setLiner(40.88);
+                        NumBase.setLiner(NumBase.getLinerkiro()*0.28*2);
                         break;
                 }
 //                updatestuts();
@@ -182,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 /*
-遠しの取得と格納
+通しの取得と格納
 */
         TextView ts;
         ts = findViewById(R.id.insatutoosi);
@@ -201,6 +242,66 @@ public class MainActivity extends AppCompatActivity {
 
         });
 /*
+抜きセットの取得と格納
+*/
+        TextView ns;
+        ns = findViewById(R.id.nukiset);
+        ns.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    TextView tv;
+                    tv=(TextView)v;
+                    String s =tv.getText().toString();
+                    double d = (double) Integer.parseInt(s);
+                    NumBase.setNukiset(d);
+                    //        updatestuts();
+                }
+            }
+
+        });
+/*
+抜き通しの取得と格納
+*/
+        TextView nt;
+        nt = findViewById(R.id.nukitoosi);
+        nt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    TextView tv;
+                    tv=(TextView)v;
+                    String s =tv.getText().toString();
+                    double d = (double) Integer.parseInt(s);
+                    NumBase.setNukitoosi(d);
+                    //        updatestuts();
+                }
+            }
+
+        });
+ /*
+抜きつきすうの取得と格納
+*/
+        TextView nts;
+        nts = findViewById(R.id.nukitukisuu);
+        nts.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    TextView tv;
+                    tv=(TextView)v;
+                    String s =tv.getText().toString();
+                    double d = (double) Integer.parseInt(s);
+                    NumBase.setNukitukisuu(d);
+                    //        updatestuts();
+                }
+            }
+
+        });
+
+
+
+        /*
 計算ボタン押し下げ
  */
 

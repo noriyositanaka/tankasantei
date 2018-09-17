@@ -9,6 +9,15 @@ public class NumBase {
     private static double lot;
     private static double insatuset;
     private static double insatutoosi;
+    private static double nukiset;
+    private static double nukitoosi;
+    private static double nukitukisuu;
+
+    private static double linerkiro;
+    private static double sinkiro;
+    private static double kyoukakiro;
+
+
 
     public static void setLiner(double liner) {
         NumBase.liner = liner;
@@ -42,6 +51,30 @@ public class NumBase {
         NumBase.tenun = tenun;
     }
 
+    public static void setNukiset(double nukiset) {
+        NumBase.nukiset = nukiset;
+    }
+
+    public static void setNukitoosi(double nukitoosi) {
+        NumBase.nukitoosi = nukitoosi;
+    }
+
+    public static void setNukitukisuu(double nukitukisuu) {
+        NumBase.nukitukisuu = nukitukisuu;
+    }
+
+    public static void setKyoukakiro(double kyoukakiro) {
+        NumBase.kyoukakiro = kyoukakiro;
+    }
+
+    public static void setLinerkiro(double linerkiro) {
+        NumBase.linerkiro = linerkiro;
+    }
+
+    public static void setSinkiro(double sinkiro) {
+        NumBase.sinkiro = sinkiro;
+    }
+
     public static double getInsatuset() {
         return insatuset;
     }
@@ -72,5 +105,29 @@ public class NumBase {
 
     public static double getTenun() {
         return tenun;
+    }
+
+    public static double getNukiset() {
+        return nukiset;
+    }
+
+    public static double getNukitoosi() {
+        return nukitoosi;
+    }
+
+    public static double getNukitukisuu() {
+        return nukitukisuu;
+    }
+
+    public static double getLinerkiro() {
+        return linerkiro;
+    }
+
+    public static double getKyoukakiro() {
+        return kyoukakiro;
+    }
+
+    public static double getSinkiro() {
+        return sinkiro;
     }
 }
