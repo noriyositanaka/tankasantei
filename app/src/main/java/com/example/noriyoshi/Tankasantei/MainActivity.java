@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -51,14 +52,20 @@ public class MainActivity extends AppCompatActivity {
         /*
         保存済み原紙価格の取得
          */
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-       // String ln = sharedPreferences.getString("LINER_KAKAKU","0");
-       // String hs = sharedPreferences.getString("HUTUU_KAKAKU","0");
-        //String ks = sharedPreferences.getString("KYOUKA_KAKAKU","0");
+       SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+       //SharedPreferences.Editor editor = sharedPreferences.edit();
 
-      //NumBase.setLinerkiro((double)Integer.parseInt(ln));
-      //NumBase.setSinkiro((double)Integer.parseInt(hs));
-      //NumBase.setKyoukakiro((double)Integer.parseInt(ks));
+       String ln = sharedPreferences.getString("LINER_KAKAKU","0");
+        Log.d("LinerKiro", "LinerKiro is "+ln);
+       String hs = sharedPreferences.getString("HUTUU_KAKAKU","0");
+        Log.d("SinKiro", "SinKiro is "+hs);
+        String ks = sharedPreferences.getString("KYOUKA_KAKAKU","0");
+        Log.d("KyoukaKiro", "KyoukaKiro is "+ks);
+
+
+        NumBase.setLinerkiro((double)Integer.parseInt(ln));
+        NumBase.setSinkiro((double)Integer.parseInt(hs));
+      NumBase.setKyoukakiro((double)Integer.parseInt(ks));
 
         /*
         原紙価格設定ボタン押し下げ
@@ -86,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (checkedId){
 
                     case R.id.radioA:
-                        NumBase.setFlute(NumBase.getSinkiro()*1.6);
+                        NumBase.setFlute(NumBase.getSinkiro()*0.12*1.6);
                         break;
                     case R.id.radioAB:
-                        NumBase.setFlute(NumBase.getSinkiro()*4);
+                        NumBase.setFlute(NumBase.getSinkiro()*0.12*4);
                         break;
                     case R.id.radioB:
-                        NumBase.setFlute(NumBase.getSinkiro()*1.4);
+                        NumBase.setFlute(NumBase.getSinkiro()*0.12*1.4);
                         break;
                 }
 
