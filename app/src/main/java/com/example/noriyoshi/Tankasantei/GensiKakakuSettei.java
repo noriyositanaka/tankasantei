@@ -22,22 +22,26 @@ public class GensiKakakuSettei extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        String lnr = sharedPreferences.getString("LINER_KAKAKU","0");
-        Log.d("LinerKiro", "LinerKiro is "+lnr);
-        String hsn = sharedPreferences.getString("HUTUU_KAKAKU","0");
-        Log.d("SinKiro", "SinKiro is "+hsn);
-        String ksn = sharedPreferences.getString("KYOUKA_KAKAKU","0");
-        Log.d("KyoukaKiro", "KyoukaKiro is "+ksn);
+        String lnr = sharedPreferences.getString("LINER_KAKAKU", "0");
+        Log.d("LinerKiro", "LinerKiro is " + lnr);
+        String hsn = sharedPreferences.getString("HUTUU_KAKAKU", "0");
+        Log.d("SinKiro", "SinKiro is " + hsn);
+        String ksn = sharedPreferences.getString("KYOUKA_KAKAKU", "0");
+        Log.d("KyoukaKiro", "KyoukaKiro is " + ksn);
 
-        TextView tv;
-        /*
-        tv = findViewById(R.id.linerkakaku);
-        tv.setText(lnr);
-        tv=findViewById(R.id.hutuusinkakaku);
-        tv.setText(hsn);
-        tv=findViewById(R.id.kyoukasinkakaku);
-        tv.setText(ksn);
-        */
+        TextView ln = findViewById(R.id.linerkakaku);
+        ln.setText(lnr);
+        TextView fs = findViewById(R.id.hutuusinkakaku);
+        fs.setText(hsn);
+        TextView ks = findViewById(R.id.kyoukasinkakaku);
+        ks.setText(ksn);
+    }
+
+
+    protected void onResume(){
+        super.onResume();
+
+
     /*
 m戻るボタン押し下げ
  */
@@ -45,6 +49,21 @@ m戻るボタン押し下げ
         modoru.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+/*
+ライナー価格取得と保管
+ */
+
+/*
+普通芯価格取得と保管
+ */
+
+/*
+強化芯価格取得と保管
+
+ */
+
+
+
 
 
 
@@ -56,7 +75,6 @@ m戻るボタン押し下げ
  ライナーキロ価格取得
   */
         TextView ln = findViewById(R.id.linerkakaku);
-        ln.setText(lnr);
         ln.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -80,7 +98,6 @@ m戻るボタン押し下げ
 普通芯キロ価格取得
   */
         TextView fs = findViewById(R.id.hutuusinkakaku);
-        fs.setText(hsn);
         fs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -104,7 +121,6 @@ m戻るボタン押し下げ
 強化芯キロ価格取得
   */
         TextView ks = findViewById(R.id.kyoukasinkakaku);
-        ks.setText(ksn);
         ks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
 
@@ -125,8 +141,5 @@ m戻るボタン押し下げ
                 }
             }
         });
-
-
-
     }
 }
