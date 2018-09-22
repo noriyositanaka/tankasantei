@@ -13,9 +13,9 @@ public class NumBase {
     private static double nukitoosi;
     private static double nukitukisuu;
 
-    private static double linerkiro;
-    private static double sinkiro;
-    private static double kyoukakiro;
+    private static String linerkiro;
+    private static String sinkiro;
+    private static String kyoukakiro;
 
 
 
@@ -63,15 +63,15 @@ public class NumBase {
         NumBase.nukitukisuu = nukitukisuu;
     }
 
-    public static void setKyoukakiro(double kyoukakiro) {
+    public static void setKyoukakiro(String kyoukakiro) {
         NumBase.kyoukakiro = kyoukakiro;
     }
 
-    public static void setLinerkiro(double linerkiro) {
+    public static void setLinerkiro(String linerkiro) {
         NumBase.linerkiro = linerkiro;
     }
 
-    public static void setSinkiro(double sinkiro) {
+    public static void setSinkiro(String sinkiro) {
         NumBase.sinkiro = sinkiro;
     }
 
@@ -119,15 +119,15 @@ public class NumBase {
         return nukitukisuu;
     }
 
-    public static double getLinerkiro() {
+    public static String getLinerkiro() {
         return linerkiro;
     }
 
-    public static double getKyoukakiro() {
+    public static String getKyoukakiro() {
         return kyoukakiro;
     }
 
-    public static double getSinkiro() {
+    public static String getSinkiro() {
         return sinkiro;
     }
 }

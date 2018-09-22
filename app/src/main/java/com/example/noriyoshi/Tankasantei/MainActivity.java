@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (j == 0) {
 
-
             g = (a + c) * b + (e / d) + f;
         }else{
             g = (a + c) * b + (e / d) + f/j+(h/d)+(i/j) ;
@@ -41,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv=findViewById(R.id.result);
         tv.setText(BigDecimal.valueOf(g).toPlainString());
-
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,20 +49,19 @@ public class MainActivity extends AppCompatActivity {
         /*
         保存済み原紙価格の取得
          */
-       SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-       //SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-       String ln = sharedPreferences.getString("LINER_KAKAKU","0");
-        Log.d("LinerKiro", "LinerKiro is "+ln);
-       String hs = sharedPreferences.getString("HUTUU_KAKAKU","0");
-        Log.d("SinKiro", "SinKiro is "+hs);
-        String ks = sharedPreferences.getString("KYOUKA_KAKAKU","0");
-        Log.d("KyoukaKiro", "KyoukaKiro is "+ks);
+        String ln = sharedPreferences.getString("LINER_KAKAKU", "0");
+        Log.d("LinerKiro", "LinerKiro is " + ln);
+        String hs = sharedPreferences.getString("HUTUU_KAKAKU", "0");
+        Log.d("SinKiro", "SinKiro is " + hs);
+        String ks = sharedPreferences.getString("KYOUKA_KAKAKU", "0");
+        Log.d("KyoukaKiro", "KyoukaKiro is " + ks);
 
 
-        NumBase.setLinerkiro((double)Integer.parseInt(ln));
-        NumBase.setSinkiro((double)Integer.parseInt(hs));
-      NumBase.setKyoukakiro((double)Integer.parseInt(ks));
+        NumBase.setLinerkiro(ln);
+        NumBase.setSinkiro(hs);
+        NumBase.setKyoukakiro(ks);
 
         /*
         原紙価格設定ボタン押し下げ
@@ -82,51 +78,48 @@ public class MainActivity extends AppCompatActivity {
 /*
 原紙とフルートの種類選択
  */
-
-
         RadioGroup f = findViewById(R.id.flute);
         RadioGroup l = findViewById(R.id.liner);
 
         f.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
+            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-
+                switch (checkedId) {
                     case R.id.radioA:
-                        NumBase.setFlute(NumBase.getSinkiro()*0.12*1.6);
+                        NumBase.setFlute(Integer.parseInt(NumBase.getSinkiro()) * 0.12 * 1.6);
                         break;
                     case R.id.radioAB:
-                        NumBase.setFlute(NumBase.getSinkiro()*0.12*4);
+                        NumBase.setFlute(Integer.parseInt(NumBase.getSinkiro()) * 0.12 * 4);
                         break;
                     case R.id.radioB:
-                        NumBase.setFlute(NumBase.getSinkiro()*0.12*1.4);
+                        NumBase.setFlute(Integer.parseInt(NumBase.getSinkiro()) * 0.12 * 1.4);
                         break;
                 }
-
-                //updatestuts();
-
             }
         });
+
         l.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId){
-
+                switch (checkedId) {
                     case R.id.radioK5:
-                        NumBase.setLiner(NumBase.getLinerkiro()*0.17*2);
+                        NumBase.setLiner(Integer.parseInt(NumBase.getLinerkiro()) * 0.17 * 2);
                         break;
                     case R.id.radioK6:
-                        NumBase.setLiner(NumBase.getLinerkiro()*0.21*2);
+                        NumBase.setLiner(Integer.parseInt(NumBase.getLinerkiro()) * 0.21 * 2);
                         break;
                     case R.id.radioK7:
-                        NumBase.setLiner(NumBase.getLinerkiro()*0.28*2);
+                        NumBase.setLiner(Integer.parseInt(NumBase.getLinerkiro()) * 0.28 * 2);
                         break;
                 }
-//                updatestuts();
-                //updatestuts();
             }
         });
+    }
+
+
+    protected void onResume(){
+        super.onResume();
 
 
 /*
