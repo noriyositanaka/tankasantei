@@ -48,8 +48,7 @@ m戻るボタン押し下げ
 
 
 
-                Intent intent = new Intent(getApplication(), MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
