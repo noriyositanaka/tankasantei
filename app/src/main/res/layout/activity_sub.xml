@@ -74,6 +74,11 @@
         android:id="@+id/sub_modoru"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
+        android:autoText="false"
+        android:focusable="auto"
+        android:focusableInTouchMode="false"
+        android:linksClickable="false"
+        android:longClickable="false"
+        android:selectAllOnFocus="false"
         android:text="戻る" />
 </LinearLayout>

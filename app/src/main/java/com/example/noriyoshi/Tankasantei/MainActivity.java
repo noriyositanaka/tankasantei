@@ -9,13 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
 import java.util.concurrent.ExecutionException;
+import java.util.zip.Inflater;
 
 /*  */
 
@@ -30,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         d=NumBase.getLot();
         e=NumBase.getInsatuset();
         f=NumBase.getInsatutoosi();
-
-        g=
 
         h=NumBase.getNukiset();
         i=NumBase.getNukitoosi();
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
+       /*
         保存済み原紙価格の取得
          */
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -71,7 +74,21 @@ public class MainActivity extends AppCompatActivity {
         NumBase.setSinkiro(hs);
         NumBase.setKyoukakiro(ks);
 
-        /*
+
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.main,menu);
+        return true;
+
+    }
+
+
+
+    protected void onResume(){
+        super.onResume();
+               /*
         原紙価格設定ボタン押し下げ
          */
         View gen = findViewById(R.id.gensikakakusettei);
@@ -83,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 /*
 原紙とフルートの種類選択
  */
@@ -103,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.radioB:
                         bairitu= 0.12 * 1.4;
                         break;
-               }
-               try {
-                   NumBase.setFlute(Integer.parseInt(NumBase.getSinkiro()) * bairitu);
-               }catch (Exception ex){}
-             updatestuts();
+                }
+                try {
+                    NumBase.setFlute(Integer.parseInt(NumBase.getSinkiro()) * bairitu);
+                }catch (Exception ex){}
+                updatestuts();
             }
         });
 
@@ -132,14 +151,8 @@ public class MainActivity extends AppCompatActivity {
                 }catch(Exception ex){}
 
                 updatestuts();
-             }
+            }
         });
-    }
-
-
-    protected void onResume(){
-        super.onResume();
-
 
 /*
 巾罫の取得と格納
@@ -169,24 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
-        hb.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setHaba(d);
-                }
-            }
-
-        });
-*/
-
-
-
-/*
 流れ罫の取得と格納
  */
         TextView ngr;
@@ -212,21 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-  /*      ngr.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setNagare(d);
-    //                updatestuts();
-                }
-            }
 
-        });
-*/
 /*
 貼合運賃の取得と格納
 
@@ -255,23 +236,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        tu.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setTenun(d);
-      //              updatestuts();
-                }
-            }
-
-        });
-        */
-
 
         /*
 ロットの取得と格納
@@ -300,22 +264,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        lt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setLot(d);
-        //            updatestuts();
-                }
-            }
-
-        });
-        */
 /*
 セットの取得と格納
 */
@@ -341,22 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        st.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setInsatuset(d);
-          //          updatestuts();
-                }
-            }
 
-        });
-        */
 /*
 通しの取得と格納
 */
@@ -383,22 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        ts.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setInsatutoosi(d);
-            //        updatestuts();
-                }
-            }
 
-        });
-        */
 /*
 抜きセットの取得と格納
 */
@@ -425,22 +343,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        ns.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setNukiset(d);
-                    //        updatestuts();
-                }
-            }
 
-        });
-        */
 /*
 抜き通しの取得と格納
 */
@@ -467,22 +370,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        nt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setNukitoosi(d);
-                    //        updatestuts();
-                }
-            }
 
-        });
-        */
  /*
 抜きつきすうの取得と格納
 */
@@ -508,23 +396,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        nts.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    TextView tv;
-                    tv=(TextView)v;
-                    String s =tv.getText().toString();
-                    double d = (double) Integer.parseInt(s);
-                    NumBase.setNukitukisuu(d);
-                    //        updatestuts();
-                }
-            }
 
-        });
-
-*/
 
         /*
 計算ボタン押し下げ
@@ -544,4 +416,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.googlekey:
+                Intent intent = new Intent(getApplication(), GoogleKeyRegistoration.class);
+                startActivity(intent);
+
+                return true;
+            default:
+
+
+                return super.onContextItemSelected(item);
+        }
+    }
 }
