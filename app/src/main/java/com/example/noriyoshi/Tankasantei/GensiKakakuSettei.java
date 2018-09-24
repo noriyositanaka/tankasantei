@@ -11,10 +11,10 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 
-public class GensiKakakuSettei extends AppCompatActivity {
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub);
+            public class GensiKakakuSettei extends AppCompatActivity {
+                protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_sub);
 
          /*
         保存済み原紙価格の取得
