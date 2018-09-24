@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 try{
                     NumBase.setNukitukisuu((double)Integer.parseInt(s.toString()));
-                }catch(Exception ex){}
+                }catch(Exception ex){                }
                 updatestuts();
 
             }
@@ -415,6 +415,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.googlekey:
+                Intent intent = new Intent(getApplication(), GoogleKeyRegistoration.class);
+                startActivity(intent);
+
+                return true;
+            default:
+
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
